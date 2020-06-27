@@ -1,13 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import YouTubeIcon from './YouTubeIcon';
 import './BlogImageTile.css';
 
 const NoImage = () => (
     <div
         style={{
-            height: '300px',
-            width: '400px',
+            height: '100%',
+            width: '100%',
             background: '#595959',
             display: 'flex',
             alignItems: 'center',
@@ -22,6 +23,7 @@ const whenText = {
     before: 'Before You Go',
     during: "While You're Here",
     after: 'Magic That Lasts',
+    ssr: 'Sixty Second Recollection',
 };
 
 export const BlogImageTile = (props) => (
@@ -42,12 +44,14 @@ export const BlogImageTile = (props) => (
                 <div className='title'>{props.title}</div>
             </Link>
         )}
+        {props.isYouTube && <YouTubeIcon className='blog-list-yt-icon' />}
         {props.src ? <img src={props.src} alt={props.title} /> : <NoImage />}
     </div>
 );
 
 BlogImageTile.propTypes = {
     cats: PropTypes.arrayOf(PropTypes.string),
+    isYouTube: PropTypes.bool,
     src: PropTypes.string,
     title: PropTypes.string,
     to: PropTypes.string,
@@ -56,6 +60,7 @@ BlogImageTile.propTypes = {
 
 BlogImageTile.defaultProps = {
     cats: [],
+    isYouTube: false,
     src: null,
     title: 'RideTheTeacups.com Article',
     to: '#',

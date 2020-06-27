@@ -1,33 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Montez&display=swap');
+
+body {
+    background: #eaeaff;
+}
+
+h2 {
+    margin: 0 0 10px;
+}
+
+.row-container {
+    overflow: hidden;
+    width: 100vw;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.row-container button.row-nav {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    padding: 0 20px;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    color: white;
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 0;
+}
+
+.row-container button.row-nav:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.row-container button.prev {
+    left: 0;
+}
+
+.row-container button.next {
+    right: 0;
+}
+
+.row-container .entries {
+    display: flex;
+    width: fit-content;
+    transition: 0.75s;
+}
+
+.row-container .entries.page1 {
+    transform: translateX(0);
+}
+
+.row-container .entries.page2 {
+    transform: translateX(calc(375px * -4));
+}
+
 .blog-image-tile {
     position: relative;
-    margin: 25px;
+    margin-right: 25px;
     width: fit-content;
     float: left;
+    height: 250px;
+    width: 350px;
+    overflow: hidden;
 }
 
 .blog-image-tile .when-text {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 2px 10px;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 700;
-    border-bottom-right-radius: 5px;
+    padding: 5px 25px 5px 15px;
+    color: #fff !important;
+    font-size: 24px;
+    font-weight: 900;
+    border-bottom-right-radius: 20px 100%;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-family: 'Montez', cursive;
+    letter-spacing: 1px;
+    z-index: 1;
 }
 
-.blog-image-tile.before .when-text {
-    background: red;
-}
-
-.blog-image-tile.during .when-text {
-    background: green;
-}
-
-.blog-image-tile.after .when-text {
-    background: blue;
+.blog-image-tile .when-text::before {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    width: calc(100% - 20px);
+    height: 40%;
+    content: '';
+    background: rgba(0, 0, 0, 0.15);
+    z-index: -1;
+    border-radius: 2px;
 }
 
 .blog-image-tile button.share {
@@ -52,6 +120,16 @@
     text-decoration: none;
 }
 
+.blog-image-tile .blog-list-yt-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 20%;
+    width: 20%;
+    /* opacity: 50%; */
+}
+
 .blog-image-tile a.text-overlay .title {
     position: absolute;
     margin: 10px;
@@ -66,15 +144,46 @@
     bottom: 10px;
 }
 
-.blog-image-tile.before a.text-overlay {
-    background: linear-gradient(transparent, rgba(255, 100, 100, 0.5));
+.blog-image-tile a.text-overlay .title i {
+    margin-right: 5px;
+    color: #ff0000;
+}
+
+.blog-image-tile.after .when-text,
+.blog-image-tile.after a.text-overlay .categories .category {
+    background: rgb(153, 50, 204);
+}
+
+.blog-image-tile.after a.text-overlay {
+    background: linear-gradient(transparent, rgba(153, 50, 204, 0.5));
+}
+
+.blog-image-tile.during .when-text,
+.blog-image-tile.during a.text-overlay .categories .category {
+    background: rgb(0, 128, 0);
 }
 
 .blog-image-tile.during a.text-overlay {
-    background: linear-gradient(transparent, rgba(100, 255, 100, 0.5));
+    background: linear-gradient(transparent, rgba(0, 128, 0, 0.5));
 }
-.blog-image-tile.after a.text-overlay {
-    background: linear-gradient(transparent, rgba(100, 100, 255, 0.5));
+
+.blog-image-tile.before .when-text,
+.blog-image-tile.before a.text-overlay .categories .category {
+    background: rgb(0, 191, 255);
+    color: black;
+}
+
+.blog-image-tile.before a.text-overlay {
+    background: linear-gradient(transparent, rgba(0, 191, 255, 0.5));
+}
+
+.blog-image-tile.ssr .when-text,
+.blog-image-tile.ssr a.text-overlay .categories .category {
+    background: rgb(249, 117, 67);
+}
+
+.blog-image-tile.ssr a.text-overlay {
+    background: linear-gradient(transparent, rgba(249, 117, 67, 0.5));
 }
 
 .blog-image-tile a.text-overlay .categories .category {
@@ -90,15 +199,4 @@
 
 .blog-image-tile a.text-overlay .categories .category:last-child {
     margin-right: 0;
-}
-
-.blog-image-tile.before a.text-overlay .categories .category {
-    background: red;
-}
-
-.blog-image-tile.during a.text-overlay .categories .category {
-    background: green;
-}
-.blog-image-tile.after a.text-overlay .categories .category {
-    background: blue;
 }
