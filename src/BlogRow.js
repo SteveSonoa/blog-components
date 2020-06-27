@@ -18,26 +18,50 @@ export const BlogRow = ({title}) => {
                 )}
                 <div className={`entries page${page}`}>
                     <BlogImageTile
+                        isShareable
+                        isHeaderVisible
                         to='#'
                         cats={['one', 'two']}
                         when='after'
                         title="This Is An Amazing Title! You Won't Believe Your Eyes!!!"
                     />
                     <BlogImageTile
+                        isShareable
+                        isHeaderVisible
                         isYouTube
                         to='#'
                         cats={['one', 'two']}
                         when='before'
                     />
-                    <BlogImageTile to='#' when='ssr' title='Kacy Wins Big!' />
-                    <BlogImageTile to='#' cats={['one', 'two']} when='during' />
                     <BlogImageTile
+                        isShareable
+                        // isHeaderVisible
+                        to='#'
+                        when='ssr'
+                        title='Kacy Wins Big!'
+                    />
+                    <BlogImageTile
+                        isShareable
+                        isHeaderVisible
+                        to='#'
+                        cats={['one', 'two']}
+                        when='during'
+                    />
+                    <BlogImageTile
+                        isShareable
+                        isHeaderVisible
                         isYouTube
                         to='#'
                         cats={['one', 'two']}
                         when='after'
                     />
-                    <BlogImageTile to='#' cats={['one', 'two']} when='during' />
+                    <BlogImageTile
+                        isShareable
+                        isHeaderVisible
+                        to='#'
+                        cats={['one', 'two']}
+                        when='during'
+                    />
                 </div>
                 <button
                     onClick={() => (page < 2 ? setPage(page + 1) : null)}

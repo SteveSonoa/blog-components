@@ -26,31 +26,50 @@ const whenText = {
     ssr: 'Sixty Second Recollection',
 };
 
-export const BlogImageTile = (props) => (
-    <div className={`blog-image-tile ${props.when}`}>
-        {props.when && <div className='when-text'>{whenText[props.when]}</div>}
-        {props.to && <button className='share'>Share</button>}
-        {props.title && (
-            <Link className='text-overlay' to={props.to}>
-                {props.cats.length > 0 && (
-                    <div className='categories'>
-                        {props.cats.map((cat) => (
-                            <span className='category' key={cat}>
-                                {cat}
-                            </span>
-                        ))}
-                    </div>
-                )}
-                <div className='title'>{props.title}</div>
-            </Link>
-        )}
-        {props.isYouTube && <YouTubeIcon className='blog-list-yt-icon' />}
-        {props.src ? <img src={props.src} alt={props.title} /> : <NoImage />}
-    </div>
-);
+export const BlogImageTile = (props) => {
+    const handleShare = (e) => {
+        e.preventDefault();
+    };
+
+    return (
+        <Link to={props.to} className={`blog-image-tile ${props.when}`}>
+            {props.isHeaderVisible && (
+                <div className='when-text'>{whenText[props.when]}</div>
+            )}
+            {props.isShareable && (
+                <button className='share' onClick={handleShare}>
+                    <i className='fas fa-share' />
+                    Share
+                </button>
+            )}
+            {props.title && (
+                <div className='text-overlay'>
+                    {props.cats.length > 0 && (
+                        <div className='categories'>
+                            {props.cats.map((cat) => (
+                                <span className='category' key={cat}>
+                                    {cat}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                    <div className='title'>{props.title}</div>
+                </div>
+            )}
+            {props.isYouTube && <YouTubeIcon className='blog-list-yt-icon' />}
+            {props.src ? (
+                <img src={props.src} alt={props.title} />
+            ) : (
+                <NoImage />
+            )}
+        </Link>
+    );
+};
 
 BlogImageTile.propTypes = {
     cats: PropTypes.arrayOf(PropTypes.string),
+    isHeaderVisible: PropTypes.bool,
+    isShareable: PropTypes.bool,
     isYouTube: PropTypes.bool,
     src: PropTypes.string,
     title: PropTypes.string,
@@ -60,6 +79,7 @@ BlogImageTile.propTypes = {
 
 BlogImageTile.defaultProps = {
     cats: [],
+    isHeaderVisible: false,
     isYouTube: false,
     src: null,
     title: 'RideTheTeacups.com Article',
