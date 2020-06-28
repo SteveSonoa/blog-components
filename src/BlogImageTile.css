@@ -8,18 +8,25 @@ h2 {
     margin: 0 0 10px;
 }
 
-.row-container {
-    overflow-x: hidden;
+.scrolling-row-with-title {
     width: 100vw;
-    position: relative;
     margin-bottom: 25px;
-    padding: 10px 10px 25px;
+    padding: 10px 10px 25px 25px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.row-container {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
 }
 
 .row-container button.row-nav {
     position: absolute;
-    top: 0;
-    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50%;
     padding: 0 20px;
     background: rgba(0, 0, 0, 0.25);
     display: flex;
@@ -39,30 +46,24 @@ h2 {
 }
 
 .row-container button.prev {
-    left: 0;
+    left: -25px;
+    border-radius: 0 10px 10px 0;
 }
 
 .row-container button.next {
-    right: 0;
+    right: -25px;
+    border-radius: 10px 0 0 10px;
 }
 
 .row-container .entries {
     display: flex;
     width: fit-content;
-    transition: 0.75s;
-}
-
-.row-container .entries.page1 {
-    transform: translateX(0);
-}
-
-.row-container .entries.page2 {
-    transform: translateX(calc(375px * -4));
+    transition: 500ms;
 }
 
 a.blog-image-tile {
     position: relative;
-    margin-right: 25px;
+    margin-right: 15px;
     width: fit-content;
     float: left;
     height: 207px;
@@ -70,16 +71,31 @@ a.blog-image-tile {
     overflow: hidden;
     border: 3px solid transparent;
     transition: 300ms;
+    border-radius: 5px;
+    transition-timing-function: ease-out;
 }
 
 a.blog-image-tile:hover {
     box-shadow: 0px 10px 20px -16px rgba(0, 0, 0, 0.8),
         0px 7px 2px -10px rgba(0, 0, 0, 0.72);
-    transform: scale(1.05, 1.05) translateZ(0px) translate3d(0px, 0px, 0px);
-    transition-duration: 300ms;
-    transition-property: transform, box-shadow;
-    transition-timing-function: ease-out;
+    transform: scale(1.05, 1.05) rotate(-1deg) translateZ(0px)
+        translate3d(0px, 0px, 0px);
     border-color: white;
+    border-radius: 0;
+}
+
+.blog-image-tile img {
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: -2;
+    transition: 400ms;
+}
+
+.blog-image-tile:hover img {
+    height: 105%;
 }
 
 a.blog-image-tile .when-text {
@@ -148,12 +164,11 @@ a.blog-image-tile .blog-list-yt-icon {
     transform: translate(-50%, -50%);
     height: 20%;
     width: unset;
-    /* opacity: 50%; */
     transition: 700ms;
+    z-index: -1;
 }
 
 a.blog-image-tile:hover .blog-list-yt-icon {
-    /* box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.7); */
     transform: translate(-50%, -70%) scale(1.2, 1.2);
     opacity: 0.5;
 }
@@ -183,7 +198,7 @@ a.blog-image-tile.after div.text-overlay .categories .category {
 }
 
 a.blog-image-tile.after div.text-overlay {
-    background: linear-gradient(transparent, rgba(153, 50, 204, 0.5));
+    background: linear-gradient(transparent 0%, rgba(153, 50, 204, 0.8) 80%);
 }
 
 a.blog-image-tile.during .when-text,
@@ -192,7 +207,7 @@ a.blog-image-tile.during div.text-overlay .categories .category {
 }
 
 a.blog-image-tile.during div.text-overlay {
-    background: linear-gradient(transparent, rgba(0, 128, 0, 0.5));
+    background: linear-gradient(transparent 0%, rgba(0, 128, 0, 0.8) 80%);
 }
 
 a.blog-image-tile.before .when-text,
@@ -202,7 +217,7 @@ a.blog-image-tile.before div.text-overlay .categories .category {
 }
 
 a.blog-image-tile.before div.text-overlay {
-    background: linear-gradient(transparent, rgba(0, 191, 255, 0.5));
+    background: linear-gradient(transparent 0%, rgba(0, 191, 255, 0.8) 80%);
 }
 
 a.blog-image-tile.ssr .when-text,
@@ -211,7 +226,7 @@ a.blog-image-tile.ssr div.text-overlay .categories .category {
 }
 
 a.blog-image-tile.ssr div.text-overlay {
-    background: linear-gradient(transparent, rgba(249, 117, 67, 0.5));
+    background: linear-gradient(transparent 0%, rgba(249, 117, 67, 0.8) 80%);
 }
 
 a.blog-image-tile div.text-overlay .categories .category {

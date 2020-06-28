@@ -1,11 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import BlogImageTile from './BlogImageTile';
 
 export const BlogRow = ({title}) => {
     const [page, setPage] = useState(1);
+    const [style, setStyle] = useState({
+        transform: 'translateX(0)',
+    });
+
+    useEffect(() => {
+        setStyle({
+            transform: `translateX(calc(((368px + 15px) * -4) * ${page - 1}))`,
+        });
+    }, [page]);
 
     return (
-        <>
+        <div className='scrolling-row-with-title'>
             <h2>{title}</h2>
             <div className='row-container'>
                 {page > 1 && (
@@ -16,7 +25,7 @@ export const BlogRow = ({title}) => {
                         Back
                     </button>
                 )}
-                <div className={`entries page${page}`}>
+                <div className='entries' style={style}>
                     <BlogImageTile
                         isShareable
                         isHeaderVisible
@@ -70,7 +79,7 @@ export const BlogRow = ({title}) => {
                     {page < 2 ? 'Next' : 'See All'}
                 </button>
             </div>
-        </>
+        </div>
     );
 };
 

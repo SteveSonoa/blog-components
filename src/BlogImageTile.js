@@ -74,14 +74,14 @@ BlogImageTile.propTypes = {
     src: PropTypes.string,
     title: PropTypes.string,
     to: PropTypes.string,
-    when: PropTypes.oneOf(['before', 'during', 'after']),
+    when: PropTypes.oneOf(['before', 'during', 'after', 'ssr']),
 };
 
 BlogImageTile.defaultProps = {
     cats: [],
     isHeaderVisible: false,
     isYouTube: false,
-    src: null,
+    src: '/header.jpg',
     title: 'RideTheTeacups.com Article',
     to: '#',
     when: '',
